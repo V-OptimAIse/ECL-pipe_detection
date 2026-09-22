@@ -1,9 +1,9 @@
 # fps, conf thresholds, debounce frames, logging
 video_source: gige
 model_path: models/yolo/yolo11n_26_16_01.engine
-tracker_yaml: "config/casters/caster_2/bytetrack.yaml"
+tracker_yaml: "config/casters/caster_3/bytetrack.yaml"
 
-debug_mode: true
+debug_mode: false
 
 imgsz: 640 # Inference
 # Image mode for YOLO/ByteTrack analysis: rgb | grey_scale
@@ -20,19 +20,19 @@ frame_skip: 0                       # 0 = process every frame, 1 = every alterna
 # Throttle non-inference logic (FSM updates, DB upserts, event handling).
 # 0 = run every inference frame. Example: 6 means update pipe/gate logic at 6Hz
 # while still running inference/tracking each processed frame.
-update_fps: 6
+update_fps: 8
 
 log_level: "INFO"                   # DEBUG|INFO|WARNING|ERROR
-log_path: "var/caster_2/pipe_detect.log"
+log_path: "var/caster_3/pipe_detect.log"
 
-db_path: "var/caster_2/caster_2_pipes.db"
-latest_jpg_path: "var/caster_2/latest.jpg"
-publish_fps: 30                      # UI refresh source
-publish_imgsz: 0              # max width/height of published image (maintain aspect ratio; can be int or [w, h])
-publish_overlay: true                # draw detection/tracking overlay on published image
+db_path: "var/caster_3/caster_3_pipes.db"
+latest_jpg_path: "var/caster_3/latest.jpg"
+publish_fps: 3                      # UI refresh source
+publish_imgsz: [1310, 608]            # max width/height of published image (maintain aspect ratio; can be int or [w, h])
+publish_overlay: false                # draw detection/tracking overlay on published image
 history:
-  enabled: false
-  base_dir: var/caster_2/history
+  enabled: true
+  base_dir: var/caster_3/history
   date_folder_format: "%Y_%m_%d"
   prefix: pipe
   time_filename_format: "%d-%m-%Y-%H-%M-%S-%f"
