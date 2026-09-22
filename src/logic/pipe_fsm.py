@@ -197,7 +197,11 @@ class PipeFlowFSM:
             # LOADCELL ENTER
             eligible = (p.origin == "caster")
 
-            if eligible and not p.pipe_checkpoint and self.rois.contains(RoiName.PIPE_CHECKPOINT.value, cx, cy):
+            if (
+                eligible
+                and not p.pipe_checkpoint
+                and self.rois.roi(RoiName.PIPE_CHECKPOINT.value).intersects_bbox(d.bbox)
+            ):
                 p.pipe_checkpoint = True
                 logger.info("Pipe entered pipe checkpoint | uid=%s", p.pipe_uid)
 
